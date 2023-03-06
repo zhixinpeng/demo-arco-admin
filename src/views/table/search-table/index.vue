@@ -285,7 +285,8 @@
     if (val) {
       nextTick(() => {
         const el = document.getElementById('tableSetting') as HTMLElement;
-        const sortable = new Sortable(el, {
+        // eslint-disable-next-line no-new
+        new Sortable(el, {
           onEnd(e: any) {
             const { oldIndex, newIndex } = e;
             exchangeArray(cloneColumns.value, oldIndex, newIndex);

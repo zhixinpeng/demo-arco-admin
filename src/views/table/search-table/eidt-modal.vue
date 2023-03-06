@@ -10,7 +10,6 @@
 
 <script setup lang="ts">
   import { QueryRecord } from '@/api/table';
-  import { defineProps, defineEmits } from 'vue';
 
   interface Props {
     visible: boolean;
