@@ -25,6 +25,7 @@ export function fetchQueryList(
     pageNo?: number;
   }
 ) {
+  console.log('fetchQueryList', params);
   return axios.get<QueryListResponse>('/api/list/query', {
     params,
     paramsSerializer: (obj) => {

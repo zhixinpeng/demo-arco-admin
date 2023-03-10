@@ -22,6 +22,16 @@ const TABLE: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'component-table',
+      name: 'ComponentTable',
+      component: () => import('@/views/table/component-table/index.vue'),
+      meta: {
+        locale: 'menu.table.componentTable',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 

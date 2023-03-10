@@ -41,6 +41,7 @@ module.exports = {
     'vue/require-default-prop': 0,
     'vue/singleline-html-element-content-newline': 0,
     'vue/max-attributes-per-line': 0,
+    'vue/no-setup-props-destructure': 0,
     // Vue: Add extra rules
     'vue/custom-event-name-casing': [2, 'camelCase'],
     'vue/no-v-text': 1,
@@ -66,5 +67,7 @@ module.exports = {
     'no-param-reassign': 0,
     'prefer-regex-literals': 0,
     'import/no-extraneous-dependencies': 0,
+    'no-use-before-define': 0,
+    'import/prefer-default-export': 0,
   },
 };
