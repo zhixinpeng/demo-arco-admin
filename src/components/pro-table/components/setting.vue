@@ -59,9 +59,10 @@
   import { ref, computed, watchEffect, reactive, unref, nextTick } from 'vue';
   import { cloneDeep } from 'lodash';
   import Sortablejs from 'sortablejs';
+  import { Size } from '@arco-design/web-vue';
 
   import { useTableContext } from '../hooks/useTableContext';
-  import { ComponentRef, Size } from '../types/index';
+  import { ComponentRef } from '../types/index';
   import { isNullAndUnDef } from '../shared/is';
 
   interface State {

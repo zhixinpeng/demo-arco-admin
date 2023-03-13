@@ -1,11 +1,10 @@
 import { ref, toRaw, unref } from 'vue';
 
-import {
-  Nullable,
-  ProColumnData,
-  ProTableAction,
-  ProTableProps,
-} from '../types';
+import { PaginationProps } from '@arco-design/web-vue/es/pagination/interface';
+import { Nullable } from '@/types/common';
+
+import { ProTableAction } from '../types/action';
+import { ProColumnData, ProTableProps } from '../types/index';
 
 export function useTable() {
   const tableRef = ref<Nullable<ProTableAction>>(null);
@@ -58,6 +57,21 @@ export function useTable() {
     },
     setColumns: (columns: ProColumnData[] | string[]) => {
       getTableInstance().setColumns(columns);
+    },
+    getCacheColumns: () => {
+      return getTableInstance().getCacheColumns();
+    },
+    getPagination: () => {
+      return getTableInstance().getPagination();
+    },
+    setPagination: (props: Partial<PaginationProps>) => {
+      getTableInstance().setPagination(props);
+    },
+    setShowPagination: async (show: boolean) => {
+      getTableInstance().setShowPagination(show);
+    },
+    getShowPagination: () => {
+      return toRaw(getTableInstance().getShowPagination());
     },
   };
 

@@ -1,10 +1,12 @@
 <template>
-  <a-card class="container" title="表格组件">
+  <a-card class="container">
     <ProTable
       ref="tableRef"
       row-key="id"
+      title="表格组件"
       :request="onRequest"
       :columns="columns"
+      :form-config="formConfig"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       @header-click="handleHeaderClick"
       @selection-change="handleSelectAll"
@@ -36,10 +38,12 @@
 </template>
 
 <script setup lang="ts">
-  import { ProTable, ProTableAction, Nullable } from '@/components/pro-table';
-  import { fetchQueryList, QueryParams, QueryRecord } from '@/api/table';
+  import { ProTable, ProTableAction } from '@/components/pro-table';
+  import { fetchQueryList } from '@/api/table';
   import { ProColumnData } from '@/components/pro-table/types';
   import { computed, ref, unref } from 'vue';
+  import { Nullable } from '@/types/common';
+  import { ProFormProps } from '@/components/pro-form';
 
   const tableRef = ref<Nullable<ProTableAction>>(null);
   const onRequest = async (params: any) => {
@@ -59,7 +63,7 @@
     console.log(column);
   };
 
-  const handleSelectAll = (rowkeys: string) => {
+  const handleSelectAll = (rowkeys: (string | number)[]) => {
     console.log(rowkeys);
   };
 
@@ -106,6 +110,63 @@
       slotName: 'operations',
     },
   ]);
+
+  const formConfig = computed<Partial<ProFormProps>>(() => ({
+    schemas: [
+      {
+        field: 'name',
+        label: '集合名称',
+        component: 'Input',
+        props: {
+          showColon: true,
+        },
+      },
+      {
+        field: 'name1',
+        label: '集合名称',
+        component: 'Input',
+        props: {
+          showColon: true,
+        },
+      },
+      {
+        field: 'name2',
+        label: '集合名称',
+        component: 'Input',
+        props: {
+          showColon: true,
+        },
+      },
+      {
+        field: 'name3',
+        label: '集合名称',
+        component: 'Input',
+        props: {
+          showColon: true,
+        },
+      },
+      {
+        field: 'contentType',
+        label: '内容体裁',
+        component: 'Select',
+        componentProps: {
+          options: [
+            {
+              value: '1',
+              label: '1',
+            },
+            {
+              value: '2',
+              label: '2',
+            },
+          ],
+        },
+        props: {
+          showColon: true,
+        },
+      },
+    ],
+  }));
 </script>
 
 <style lang="less" scoped>

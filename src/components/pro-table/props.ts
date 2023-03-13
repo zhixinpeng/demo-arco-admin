@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PropType } from 'vue';
 
-import { PaginationProps, ScrollbarProps } from '@arco-design/web-vue';
+import { PaginationProps, ScrollbarProps, Size } from '@arco-design/web-vue';
 import { VirtualListProps } from '@arco-design/web-vue/es/_components/virtual-list-v2/interface';
 import {
   TableBorder,
+  TableChangeExtra,
   TableComponents,
   TableData,
   TableDraggable,
@@ -12,8 +14,10 @@ import {
   TablePagePosition,
   TableRowSelection,
 } from '@arco-design/web-vue/es/table/interface';
+import { Fn } from '@/types/common';
 
-import { ProColumnData, Size } from './types';
+import { ProColumnData } from './types';
+import { ProFormProps } from '../pro-form/types';
 
 export const baseProps = {
   request: {
@@ -33,6 +37,18 @@ export const baseProps = {
   columns: {
     type: Array as PropType<ProColumnData[]>,
     default: [],
+  },
+  formConfig: {
+    type: Object as PropType<Partial<ProFormProps>>,
+    default: null,
+  },
+  beforeSearch: {
+    type: Function as PropType<Fn>,
+    default: null,
+  },
+  title: {
+    type: String,
+    default: '',
   },
   /**
    * @zh 表格的数据
@@ -351,4 +367,115 @@ export const baseProps = {
     type: [Object, Boolean] as PropType<boolean | ScrollbarProps>,
     default: true,
   },
+};
+
+export const baseEmit = {
+  'update:selectedKeys': (rowKeys: (string | number)[]) => true,
+  'update:expandedKeys': (rowKeys: (string | number)[]) => true,
+  /**
+   * @zh 点击展开行时触发
+   * @en Triggered when a row is clicked to expand
+   * @param {string | number} rowKey
+   * @param {TableData} record
+   */
+  'expand': (rowKey: string | number, record: TableData) => true,
+  /**
+   * @zh 已展开的数据行发生改变时触发
+   * @en Triggered when the expanded data row changes
+   * @param {(string | number)[]} rowKeys
+   */
+  'expandedChange': (rowKeys: (string | number)[]) => true,
+  /**
+   * @zh 点击行选择器时触发
+   * @en Triggered when the row selector is clicked
+   * @param {string | number[]} rowKeys
+   * @param {string | number} rowKey
+   * @param {TableData} record
+   */
+  'select': (
+    rowKeys: (string | number)[],
+    rowKey: string | number,
+    record: TableData
+  ) => true,
+  /**
+   * @zh 点击全选选择器时触发
+   * @en Triggered when the select all selector is clicked
+   * @param {boolean} checked
+   */
+  'selectAll': (checked: boolean) => true,
+  /**
+   * @zh 已选择的数据行发生改变时触发
+   * @en Triggered when the selected data row changes
+   * @param {(string | number)[]} rowKeys
+   */
+  'selectionChange': (rowKeys: (string | number)[]) => true,
+  /**
+   * @zh 排序规则发生改变时触发
+   * @en Triggered when the collation changes
+   * @param {string} dataIndex
+   * @param {string} direction
+   */
+  'sorterChange': (dataIndex: string, direction: string) => true,
+  /**
+   * @zh 过滤选项发生改变时触发
+   * @en Triggered when the filter options are changed
+   * @param {string} dataIndex
+   * @param {string[]} filteredValues
+   */
+  'filterChange': (dataIndex: string, filteredValues: string[]) => true,
+  /**
+   * @zh 表格分页发生改变时触发
+   * @en Triggered when the table pagination changes
+   * @param {number} page
+   */
+  'pageChange': (page: number) => true,
+  /**
+   * @zh 表格每页数据数量发生改变时触发
+   * @en Triggered when the number of data per page of the table changes
+   * @param {number} pageSize
+   */
+  'pageSizeChange': (pageSize: number) => true,
+  /**
+   * @zh 表格数据发生变化时触发
+   * @en Triggered when table data changes
+   * @param {TableData[]} data
+   * @param {TableChangeExtra} extra
+   * @param {TableData[]} currentData
+   * @version 2.40.0 增加 currentData
+   */
+  'change': (
+    data: TableData[],
+    extra: TableChangeExtra,
+    currentData: TableData[]
+  ) => true,
+  /**
+   * @zh 点击单元格时触发
+   * @en Triggered when a cell is clicked
+   * @param {TableData} record
+   * @param {ProColumnData} column
+   * @param {Event} ev
+   */
+  'cellClick': (record: TableData, column: ProColumnData, ev: Event) => true,
+  /**
+   * @zh 点击行数据时触发
+   * @en Triggered when row data is clicked
+   * @param {TableData} record
+   * @param {Event} ev
+   */
+  'rowClick': (record: TableData, ev: Event) => true,
+  /**
+   * @zh 点击表头数据时触发
+   * @en Triggered when the header data is clicked
+   * @param {ProColumnData} column
+   * @param {Event} ev
+   */
+  'headerClick': (column: ProColumnData, ev: Event) => true,
+  /**
+   * @zh 调整列宽时触发
+   * @en Triggered when column width is adjusted
+   * @param {string} dataIndex
+   * @param {number} width
+   * @version 2.28.0
+   */
+  'columnResize': (dataIndex: string, width: number) => true,
 };

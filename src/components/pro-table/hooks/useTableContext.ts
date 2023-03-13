@@ -1,7 +1,7 @@
 import type { Ref } from 'vue';
 import { inject, provide } from 'vue';
-
-import { Nullable, ProTableAction } from '../types';
+import { Nullable } from '@/types/common';
+import { ProTableAction } from '../types/action';
 
 const key = Symbol('pro-table');
 

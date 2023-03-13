@@ -1,5 +1,11 @@
 <template>
   <div ref="wrapRef">
+    <pro-form
+      ref="formRef"
+      submit-on-reset
+      v-bind="getFormProps"
+      @submit="handleFormSubmit"
+    />
     <a-row style="margin-bottom: 16px">
       <a-col :span="12">
         <a-space>
@@ -34,11 +40,12 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, unref, useAttrs } from 'vue';
-  import { Message, PaginationProps } from '@arco-design/web-vue';
+  import { ref, computed, unref, useAttrs, useSlots } from 'vue';
+  import { Message, PaginationProps, Size } from '@arco-design/web-vue';
   import useLoading from '@/hooks/loading';
 
-  import { ProTableAction, ProTableProps, Size } from '../types';
+  import { ProForm } from '@/components/pro-form';
+  import { Recordable } from '@/types/common';
   import { useTable } from '../hooks/useTable';
   import { usePagination } from '../hooks/usePagination';
   import { useColumns } from '../hooks/useColumns';
@@ -46,9 +53,13 @@
   import { createTableContext } from '../hooks/useTableContext';
   import { baseProps } from '../props';
   import { isBoolean } from '../shared/is';
+  import { useTableForm } from '../hooks/useTableForm';
+  import { ProTableAction } from '../types/action';
+  import { ProTableProps } from '../types/index';
 
   const props = defineProps(baseProps);
   const attrs = useAttrs();
+  const slots = useSlots();
   const innerPropsRef = ref<Partial<ProTableProps>>();
 
   // 获取 ProTable 组件的所有 Props
@@ -85,17 +96,13 @@
     setShowPagination,
     getShowPagination,
   } = usePagination(getProps);
-  const {
-    getColumnsRef,
-    getCacheColumns,
-    getColumns,
-    setColumns,
-    getViewColumns,
-  } = useColumns(getProps);
+
+  const { getCacheColumns, getColumns, setColumns, getViewColumns } =
+    useColumns(getProps);
 
   const wrapRef = ref(null);
 
-  const fetchData = async () => {
+  const fetchData = async (info?: Recordable) => {
     setLoading(true);
     try {
       let params;
@@ -108,6 +115,13 @@
         params = {
           pageNo: current,
           pageSize,
+        };
+      }
+
+      if (info) {
+        params = {
+          ...params,
+          ...info,
         };
       }
 
@@ -133,6 +147,12 @@
     fetchData();
   };
 
+  const { getFormProps, handleFormSubmit } = useTableForm(
+    getProps,
+    slots,
+    fetchData
+  );
+
   const tableAction: ProTableAction = {
     ...methods,
     reload: fetchData,
@@ -140,11 +160,17 @@
     getSize: () => unref(getBindValues).size as Size,
     getColumns,
     setColumns,
+    getCacheColumns,
+    getPagination,
+    setPagination,
+    getShowPagination,
+    setShowPagination,
   };
 
   createTableContext({ ...tableAction, wrapRef });
 
   defineExpose<ProTableAction>(tableAction);
+  // defineEmits(baseEmit);
 </script>
 
-<style scoped></style>
+<style lang="less" scoped></style>
