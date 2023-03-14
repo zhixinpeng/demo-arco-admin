@@ -112,6 +112,12 @@
   ]);
 
   const formConfig = computed<Partial<ProFormProps>>(() => ({
+    labelColProps: {
+      span: 8,
+    },
+    wrapperColProps: {
+      span: 16,
+    },
     schemas: [
       {
         field: 'name',

@@ -1,6 +1,7 @@
 <template>
   <div ref="wrapRef">
     <pro-form
+      v-if="getFormProps.schemas && getFormProps.schemas.length > 0"
       ref="formRef"
       submit-on-reset
       v-bind="getFormProps"
@@ -85,7 +86,7 @@
     return unref(getProps).showSetting || true;
   });
 
-  const { loading, setLoading } = useLoading(true);
+  const { loading, setLoading } = useLoading(false);
   const renderData = ref<any[]>([]);
 
   const { tableRef, methods } = useTable();
@@ -103,6 +104,7 @@
   const wrapRef = ref(null);
 
   const fetchData = async (info?: Recordable) => {
+    if (!request) return;
     setLoading(true);
     try {
       let params;
