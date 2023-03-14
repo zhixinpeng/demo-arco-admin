@@ -33,8 +33,8 @@
               @change="onChange"
             >
               <div
-                v-for="item in plainOptions"
-                :key="item.dataIndex"
+                v-for="item in plainSortOptions"
+                :key="item.value"
                 class="columns"
               >
                 <div class="drag-icon" style="cursor: move">
@@ -44,7 +44,7 @@
                   <a-checkbox :value="item.value"></a-checkbox>
                 </div>
                 <div class="title">
-                  {{ item.title === '#' ? '序列号' : item.title }}
+                  {{ item.label }}
                 </div>
               </div>
             </a-checkbox-group>
@@ -164,10 +164,7 @@
     state.checkedList = checkList;
   };
 
-  let isInit = false;
-
   function handleVisibleChange() {
-    if (isInit) return;
     nextTick(() => {
       const columnListEl = unref(columnListRef);
       if (!columnListEl) return;
@@ -208,7 +205,6 @@
           table.setColumns(newColumns);
         },
       });
-      isInit = true;
     });
   }
 

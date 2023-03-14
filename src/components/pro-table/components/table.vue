@@ -149,11 +149,7 @@
     fetchData();
   };
 
-  const { getFormProps, handleFormSubmit } = useTableForm(
-    getProps,
-    slots,
-    fetchData
-  );
+  const { getFormProps, handleFormSubmit } = useTableForm(getProps, fetchData);
 
   const tableAction: ProTableAction = {
     ...methods,

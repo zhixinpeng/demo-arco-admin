@@ -1,12 +1,11 @@
 import { ProFormProps } from '@/components/pro-form/types';
 import { Recordable } from '@/types/common';
 import { isFunction } from 'lodash';
-import { computed, ComputedRef, Slots, unref, Ref } from 'vue';
+import { computed, ComputedRef, unref } from 'vue';
 import { ProTableProps } from '../types';
 
 export function useTableForm(
   propsRef: ComputedRef<ProTableProps>,
-  slots: Slots,
   fetchData: (info?: Recordable) => Promise<void>
 ) {
   const getFormProps = computed((): Partial<ProFormProps> => {

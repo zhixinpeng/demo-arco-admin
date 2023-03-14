@@ -8,6 +8,7 @@
       :columns="columns"
       :form-config="formConfig"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+      :pagination="{ pageSize: 10 }"
       @header-click="handleHeaderClick"
       @selection-change="handleSelectAll"
     >
@@ -39,7 +40,7 @@
 
 <script setup lang="ts">
   import { ProTable, ProTableAction } from '@/components/pro-table';
-  import { fetchQueryList } from '@/api/table';
+  import { fetchQueryList, QueryRecord } from '@/api/table';
   import { ProColumnData } from '@/components/pro-table/types';
   import { computed, ref, unref } from 'vue';
   import { Nullable } from '@/types/common';
