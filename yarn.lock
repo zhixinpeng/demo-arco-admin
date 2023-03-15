@@ -1271,6 +1271,11 @@ archive-type@^4.0.0:
   dependencies:
     file-type "^4.2.0"
 
+arco-pro-table@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/arco-pro-table/-/arco-pro-table-1.0.2.tgz#16161e1671dc9fee28fb48a78c8ebe665b7424da"
+  integrity sha512-HPg0gdd7uLXFYR11L8aZWamHat7rDuIAGNLTKTY34WxOAGNUi+NGSmHMKYvw7RhMsLO+hSV7Rtxg1W6Y20VfYA==
+
 arg@^4.1.0:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/arg/-/arg-4.1.3.tgz#269fc7ad5b8e42cb63c896d5666017261c144089"

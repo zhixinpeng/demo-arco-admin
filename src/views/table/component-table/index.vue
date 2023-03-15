@@ -1,6 +1,6 @@
 <template>
   <a-card class="container">
-    <ProTable
+    <arco-pro-table
       ref="tableRef"
       row-key="id"
       title="表格组件"
@@ -34,7 +34,7 @@
         <a-button type="text" size="small">事件查询{{ record.name }}</a-button>
         <a-button type="text" size="small">编辑</a-button>
       </template>
-    </ProTable>
+    </arco-pro-table>
   </a-card>
 </template>
 

@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import ArcoVue from '@arco-design/web-vue';
+import ArcoProTable from 'arco-pro-table';
 import ArcoVueIcon from '@arco-design/web-vue/es/icon';
 import globalComponents from '@/components';
 import router from './router';
@@ -11,11 +12,13 @@ import App from './App.vue';
 import '@arco-design/web-vue/dist/arco.css';
 import '@/assets/style/global.less';
 import '@/api/interceptor';
+import 'arco-pro-table/index.css';
 
 const app = createApp(App);
 
 app.use(ArcoVue, {});
 app.use(ArcoVueIcon);
+app.use(ArcoProTable);
 
 app.use(router);
 app.use(store);
