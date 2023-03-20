@@ -1271,10 +1271,10 @@ archive-type@^4.0.0:
   dependencies:
     file-type "^4.2.0"
 
-arco-pro-table@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/arco-pro-table/-/arco-pro-table-1.0.3.tgz#777d916d7e351cd25dd3df5ec5b88ced87f9d40d"
-  integrity sha512-q1/EBwqi5yycKff85vsCXRC1y2nh/QBQN1jBb5ukwYzmMAdjrM2VqEzs0t4/KevsLwTWMHb+iViuxK/rw6Uhaw==
+arco-pro-table@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/arco-pro-table/-/arco-pro-table-1.0.4.tgz#c18de59befdfdd5598ff4355536783fa71c485e9"
+  integrity sha512-YbLuFdiRqjqeRlwEwjSKjS3zm7MJASezxekHg5zwItYgNpofTdp6OX3wn9dUlLdsui35cAOQtMhDPoX0zTAe6g==
 
 arg@^4.1.0:
   version "4.1.3"

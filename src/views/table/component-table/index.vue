@@ -162,7 +162,18 @@
       {
         field: 'name',
         label: '集合名称',
-        component: 'Input',
+        component: 'Cascader',
+        componentProps: {
+          options: [
+            {
+              label: 'beijing',
+              value: 'beijing',
+            },
+          ],
+          loadMore: (option: any) => {
+            console.log(option);
+          },
+        },
         props: {
           showColon: true,
         },
