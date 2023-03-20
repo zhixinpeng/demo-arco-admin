@@ -13,7 +13,7 @@
       @selection-change="handleSelectAll"
     >
       <template #action>
-        <a-button type="primary">
+        <a-button type="primary" @click="() => handleCreate()">
           <template #icon>
             <icon-plus />
           </template>
@@ -32,19 +32,58 @@
       </template>
       <template #operations="{ record }: { record: QueryRecord }">
         <a-button type="text" size="small">事件查询{{ record.name }}</a-button>
-        <a-button type="text" size="small">编辑</a-button>
+        <a-button type="text" size="small" @click="() => handleEdit(record)"
+          >编辑</a-button
+        >
       </template>
     </arco-pro-table>
+    <modal
+      :visible="visible"
+      :record="currentRecord"
+      @cancel="handleModalCancel"
+      @ok="handleModalOk"
+    />
   </a-card>
 </template>
 
 <script setup lang="ts">
-  import { ProTable, ProTableAction } from '@/components/pro-table';
   import { fetchQueryList, QueryRecord } from '@/api/table';
-  import { ProColumnData } from '@/components/pro-table/types';
   import { computed, ref, unref } from 'vue';
   import { Nullable } from '@/types/common';
-  import { ProFormProps } from '@/components/pro-form';
+  import { ProColumnData, ProFormProps, ProTableAction } from 'arco-pro-table';
+  import Modal from './modal.vue';
+
+  // 弹窗可见性
+  const visible = ref(false);
+  // 弹窗的初始数据
+  const currentRecord = ref<QueryRecord>({} as QueryRecord);
+  // 弹窗 cancel 事件处理
+  const handleModalCancel = () => {
+    visible.value = false;
+  };
+  // 弹窗 ok 事件处理
+  const handleModalOk = (record: QueryRecord) => {
+    // 如果需要在父组件处理数据就带 record 参数，否则不要
+    console.log(record);
+    // 关闭弹窗
+    visible.value = false;
+    // 刷新表格
+    tableRef.value?.reload();
+  };
+  // 打开新建弹窗
+  const handleCreate = () => {
+    // 设置弹窗的初始数据
+    currentRecord.value = {} as QueryRecord;
+    // 打开弹窗
+    visible.value = true;
+  };
+  // 打开编辑弹窗
+  const handleEdit = (record: QueryRecord) => {
+    // 设置弹窗的初始数据
+    currentRecord.value = record;
+    // 打开弹窗
+    visible.value = true;
+  };
 
   const tableRef = ref<Nullable<ProTableAction>>(null);
   const onRequest = async (params: any) => {
