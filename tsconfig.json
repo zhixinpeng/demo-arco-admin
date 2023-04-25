@@ -16,6 +16,6 @@
     "skipLibCheck": true,
     "types": ["arco-pro-table/dist/types"]
   },
-  "include": ["src/**/*", "src/**/*.vue"],
+  "include": ["src/**/*", "src/**/*.vue", "public/tinymce"],
   "exclude": ["node_modules"]
 }

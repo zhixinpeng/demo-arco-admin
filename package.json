@@ -83,6 +83,7 @@
     "stylelint-config-standard": "^29.0.0",
     "stylelint-order": "^5.0.0",
     "typescript": "^4.8.4",
+    "tinymce": "^5.10.7",
     "unplugin-vue-components": "^0.22.8",
     "vite": "^3.2.5",
     "vite-plugin-compression": "^0.5.1",

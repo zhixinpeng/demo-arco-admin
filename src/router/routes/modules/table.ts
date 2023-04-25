@@ -32,6 +32,16 @@ const TABLE: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'rich',
+      name: 'RichText',
+      component: () => import('@/views/richtext/index.vue'),
+      meta: {
+        locale: 'menu.table.componentTable',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 
